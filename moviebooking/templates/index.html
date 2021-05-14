@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="rectanglebar">
+        <br><br>
+        <div class="container">
+            <div class="card-deck">
+                {% for movie in movies %}
+                <div class="col mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ movie.url }}" alt="Card image cap">
+                        <a href="/searchpage/" class="anchor"><button class="btn btn-block btn-success">Book Now</button></a>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+        <br><br>
+    </div>
+</div>
+{% endblock %}

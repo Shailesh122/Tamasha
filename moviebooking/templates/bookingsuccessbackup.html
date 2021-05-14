@@ -1,0 +1,232 @@
+<head>
+    <style>
+        body
+{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#Username
+{
+  border:none;
+  border-bottom:1px solid;
+}
+
+.screen
+{
+  width:100%;
+  height:20px;
+  background:#4388cc;
+  color:#fff;
+  line-height:20px;
+  font-size:15px;
+}
+
+.smallBox::before
+{
+  content:".";
+  width:15px;
+  height:15px;
+  float:left;
+  margin-right:10px;
+}
+.greenBox::before
+{
+  content:"";
+  background:Green;
+}
+.redBox::before
+{
+  content:"";
+  background:Red;
+}
+.emptyBox::before
+{
+  content="";
+  box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    background-color:#ccc;
+}
+
+.seats
+{
+  border:1px solid red;background:yellow;
+}
+
+
+
+.seatGap
+{
+  width:40px;
+}
+
+.seatVGap
+{
+  height:40px;
+}
+
+table
+{
+  text-align:center;
+}
+
+
+.Displaytable
+{
+  text-align:center;
+}
+.Displaytable td, .Displaytable th {
+    border: 1px solid;
+    text-align: left;
+}
+
+textarea
+{
+  border:none;
+  background:transparent;
+}
+
+
+
+input[type=checkbox] {
+    width:0px;
+    margin-right:18px;
+}
+
+input[type=checkbox]:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align:middle;
+    text-align: center;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    background-color:#ccc;
+}
+
+input[type=checkbox]:checked:before {
+    background-color:Green;
+    font-size: 15px;
+}
+
+
+
+
+    </style>
+
+</head>
+
+<body onload="onLoaderFunc()">
+<script>
+
+function onLoaderFunc()
+{
+  $(".seatStructure *").prop("disabled", true);
+  $(".displayerBoxes *").prop("disabled", true);
+}
+function takeData()
+{
+  if (( $("#Username").val().length == 0 ) || ( $("#Numseats").val().length == 0 ))
+  {
+  alert("Please Enter your Name and Number of Seats");
+  }
+  else
+  {
+    $(".inputForm *").prop("disabled", true);
+    $(".seatStructure *").prop("disabled", false);
+    document.getElementById("notification").innerHTML = "<b style='margin-bottom:0px;background:yellow;'>Please Select your Seats NOW!</b>";
+  }
+}
+
+
+function updateTextArea() {
+var selected = "";
+    var checkedValue = "";
+var inputElements = document.getElementsByClassName('seats');
+for(var i=0; inputElements[i]; ++i){
+      if(inputElements[i].checked){
+           checkedValue = checkedValue+","+inputElements[i].value;
+           //break;
+      }
+}
+     document.getElementById("demo").innerHTML = "Hello World" + checkedValue;
+
+  }
+
+
+
+
+$(":checkbox").click(function() {
+
+    $(":checkbox").prop('disabled', true);
+    $(':checked').prop('disabled', false);
+
+});
+</script>
+<div class="inputForm">
+<center>
+  Name *: <input type="text" id="Username" required>
+  Number of Seats *: <input type="number" id="Numseats" required>
+  <br/><br/>
+  <button onclick="takeData()">Start Selecting</button>
+</center>
+</div>
+
+
+<div class="seatStructure">
+<center>
+
+<table id="seatsBlock">
+ <p id="notification"></p>
+  <tr>
+    <td colspan="14"><div class="screen">SCREEN</div></td>
+    <td rowspan="20">
+      <div class="smallBox greenBox">Selected Seat</div> <br/>
+      <div class="smallBox redBox">Reserved Seat</div><br/>
+      <div class="smallBox emptyBox">Empty Seat</div><br/>
+    </td>
+
+    <br/>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td></td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+    <td>10</td>
+    <td>11</td>
+    <td>12</td>
+</tr>
+{% for row in rows %}
+                                <tr >
+                                    <td>{{row}}</td>
+                                    {% for seat in seats %}
+                                    {% if seat %}
+                                    <td><input type="checkbox" class="seats" name="choices" value="{{row}}{{seat}}" onchange="updateTextArea()"></td>
+                                    {% else %}
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+
+
+</table>
+
+<br/><button onclick="updateTextArea()">Confirm Selection</button>
+</center>
+
+    <p id="demo">  </p>
+</div>
+
+<br/><br/>
+</table>
+</center>
+</div>
+

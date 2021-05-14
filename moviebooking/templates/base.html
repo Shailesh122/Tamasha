@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Tamasha</title>
+  {% load static %}
+  <link rel="shortcut icon" href="{% static 'tamasha.ico' %}" type="image/x-icon">
+
+
+  <style>
+    body {
+      background-image: url("{% static 'pattern.jpg' %}");
+      background-position: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .bodygradient {
+
+      background: linear-gradient(180deg, #000000 0%, rgba(29, 29, 29, 0) 100%);
+
+    }
+
+    .maketransparent {
+
+      opacity: 0.4;
+    }
+
+    .navbar {
+      background: rgba(101, 101, 101, 0.25);
+      box-shadow: 0px 0.5px 4px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(9px);
+      opacity: 0.8;
+      border-radius: 26px;
+    }
+
+    .btn1 {
+      background: linear-gradient(180deg, #5E5E5E 0%, #474747 49.48%, #434242 100%);
+      border-radius: 23px;
+    }
+
+    .btn3 {
+      background: rgba(101, 101, 101, 0.25);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
+      /* Note: backdrop-filter has minimal browser support */
+
+    }
+
+    a {
+      font-family: Saab;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 30px;
+      color: rgba(255, 255, 255, 0.65);
+
+    }
+
+    .anchor:hover {
+      text-decoration: none;
+      font-size: 150%;
+      color: hotpink;
+    }
+
+    .anchor1:hover {
+      text-decoration: none;
+      color: hotpink;
+    }
+
+    .anchor1 {
+      text-decoration: none;
+      width: 134.88px;
+      height: 57px;
+      font-family: Saab;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 32px;
+      line-height: 57px;
+
+      color: #FFFFFF;
+
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .logoname {
+      width: 134.88px;
+      height: 57px;
+      font-family: Saab;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 32px;
+      line-height: 57px;
+
+      color: #FFFFFF;
+
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .rectanglebar {
+
+      background: rgba(165, 143, 143, 0.25);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
+      /* Note: backdrop-filter has minimal browser support */
+
+      border-radius: 26px;
+    }
+
+    .smallfonts {
+      font-family: Sen;
+      font-style: normal;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+
+    .medifonts {
+      font-family: Sen;
+      font-style: normal;
+      font-weight: bold;
+      color: #FFFFFF;
+      font-size: 20px;
+      line-height: 27px;
+    }
+
+    .bigfonts {
+
+      font-family: Sen;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 55px;
+      color: #FFFFFF;
+
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bookingbtn {
+      background: rgba(49, 141, 59, 0.8);
+      width: 100%;
+
+    }
+
+    .bookingbtn2 {
+
+      background: rgba(69, 126, 179, 0.8);
+      width: 100%;
+
+    }
+
+    {% block style %}
+
+    {% endblock %}
+  </style>
+
+</head>
+<div class="bodygradient">
+
+  <body>
+    <div class="container-fluid bodyimage">
+      <br>
+      <br>
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+          <table>
+
+            <tr>
+
+              <td><a href="/" class="anchor1"> <img src="{% static 'tamasha.png' %}"></a></td>
+              <td>
+                <h1 class="logoname"> <a href="/" class="anchor1"> Tamasha </a></h1>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-8">
+          <nav class="navbar navbar-expand-sm navbar-right">
+            <div class="container-fluid">
+
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/" class="anchor">Home &nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a href="/searchpage/" class="anchor">Book shows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a href="/mybookings/" class="anchor">My bookings &nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+
+              </ul>
+              <button class="btn btn1 navbar-btn"><a href="/register" class="anchor">Sign Up</a></button>
+            </div>
+          </nav>
+        </div>
+
+      </div>
+      <div class="col-md-2"></div>
+
+    </div>
+    <br><br><br>
+    <!-- content start -->
+    {% block content %}
+
+    {% endblock %}
+    <!-- content end -->
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</div>
+
+</html>

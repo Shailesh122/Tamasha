@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if check is False %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="rectanglebar col-md-8">
+            <div class="container">
+                <div class="bigfonts">
+                    Select the Date, City and Movie name you want to visit!!
+                </div>
+                {% load crispy_forms_tags %}
+
+                <form action="" method="post" class="smallfonts">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <input type="submit" value="Submit">
+                </form>
+
+                {{location}}<br>
+                {{movie}}<br>
+                {{datestring}}<br>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endif %}
+{% if shows %}
+<br> <br>
+<div class="container">
+    <div class="rectanglebar">
+        <br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card-deck">
+                        <div>
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="{{ url }}" alt="Card image cap">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+
+                    {% for show, vals in shows.items %}
+                    <div class="medifonts">
+                        <!-- Shailesh Talkies -->
+                        {{ show }}
+                        <!-- [[' 12:00', <BookingForm bound=False, valid=Unknown, fields=(theater_relid)>]] -->
+                        <!-- {{ vals }}
+                        dict_items([('Shailesh Talkies', [[' 12:00', <BookingForm bound=False, valid=Unknown, fields=(theater_relid)>]])])
+                        {{ shows.items }} -->
+                        <!-- <hr> is horizontal rule -->
+                        <hr style="background-color:white;">
+                        <ul class="list-inline">
+                            {% if vals %}
+                            {% for val in vals %}
+                            <li class="list-inline-item mb-3">
+                                <!--    <a class="rectanglebar" target="_blank" href="/booking/{{val.1}}" style="text-decoration: none;">
+                                        &nbsp;{{val.0}} &nbsp;
+                                    </a>
+                                </li>-->
+                                <form action="/bookingpage/" method="post" class="smallfonts">
+                                    {% csrf_token %}
+                                    {{ val.1 | crispy }}
+                                    <!-- {{ val.0 }} 12:00 in plain white color -->
+                                    <input type="submit" class="rectanglebar" value="{{val.0}}" style="color:white;">
+                                </form>
+                            </li>
+                            {% endfor %}
+                            {% else %}
+                            <p>There are no shows running here!!!</p>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock %}

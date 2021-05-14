@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block style %}
+input[type=checkbox] {
+    width:0px;
+    margin-right:18px;
+}
+
+.booked{
+  content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align:bottom;
+    text-align: bottom;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    background-color:red;
+}
+
+input[type=checkbox]:before {
+   content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align:middle;
+    text-align: center;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    background-color:#ccc;
+}
+
+input[type=checkbox]:checked:before {
+    background-color:Green;
+    font-size: 15px;
+}
+
+
+ td {
+  padding: 15px;
+}
+ th {
+  padding: 10px;
+}
+{% endblock %}
+{% block content %}
+
+{% if theaterrelid %}
+
+<script>
+function updateTextArea() {
+var selected = "";
+    var checkedValue = "";
+var inputElements = document.getElementsByClassName('seats');
+for(var i=0; inputElements[i]; ++i){
+      if(inputElements[i].checked){
+           checkedValue = checkedValue+","+inputElements[i].value;
+           //break;
+      }
+}
+
+    document.getElementById("id_selected_seats").value = checkedValue;
+  }
+</script>
+
+<div class="container">
+    <div class="rectanglebar">
+        <br>
+        <div class="container">
+            <div class="bigfonts">
+                <center>Select Your Preferred Seats!!</center>
+            </div>
+            <div class="medifonts">
+                <p id="demo"></p>
+            </div>
+
+            <center>
+                <table id="seatsBlock" border="0" class="medifonts">
+                   <tr>
+                       <th colspan="{{colspan}}">
+                                   <div class=" container">
+                                       <button class="btn btn-block btn-primary medifonts" onclick="updateTextArea()">Screen This Way</button>
+                                   </div>
+
+                                </th>
+                  </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                {% for seat in seats %}
+                                <td> {{seat}}</td>
+                                {% endfor %}
+                            </tr>
+                  {% for row in rows %}
+                                <tr >
+                                    <td>{{row}}</td>
+                                    {% for seat in seats %}
+                                    {% if seat %}
+                                        {% with row|add:seat as rowseat %}
+                                            {% if rowseat in bookedseats %}
+                                           <td><div class="booked"> </div></td>
+                                            {% else %}
+                                             <td><input type="checkbox" class="seats" name="choices" value="{{row}}{{seat}}" onchange="updateTextArea()" ></td>
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% else %}
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+
+                            <tr>
+                                <td colspan="{{colspan}}">
+                               <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                        {% load crispy_forms_tags %}
+<form action="/bookingpage/success/" method="post" class="smallfonts">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                                <input type="submit" value="Confirm Selection" class="btn btn-success btn-block">
+                                 </form>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                                </td>
+                            </tr>
+                 </table>
+            </center>
+
+
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
